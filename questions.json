@@ -1,0 +1,27 @@
+[
+  {
+    "question": "Apa yang dimaksud dengan 'Kesatuan Ilmu' (Unity of Sciences)?",
+    "options": [
+      "Semua ilmu adalah satu",
+      "Integrasi ilmu agama dan umum",
+      "Hanya mempelajari sains",
+      "Filsafat murni"
+    ],
+    "answer": "Integrasi ilmu agama dan umum"
+  },
+  {
+    "question": "Metafora 'pohon ilmu' dalam filsafat Islam sering merujuk pada karya siapa?",
+    "options": ["Al-Ghazali", "Ibnu Sina", "Al-Kindi", "Ibnu Khaldun"],
+    "answer": "Al-Ghazali"
+  },
+  {
+    "question": "Pilar utama dalam paradigma Kesatuan Ilmu di UIN Walisongo adalah...",
+    "options": [
+      "Humanitas, Spiritualitas, Ekologi",
+      "Fisika, Kimia, Biologi",
+      "Sains, Sosial, Humaniora",
+      "Ilmu, Iman, Amal"
+    ],
+    "answer": "Ilmu, Iman, Amal"
+  }
+]
