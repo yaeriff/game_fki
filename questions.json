@@ -23,5 +23,373 @@
       "Ilmu, Iman, Amal"
     ],
     "answer": "Ilmu, Iman, Amal"
+  },
+
+  {
+    "question": "UIN Walisongo menerapkan Unity of Science dalam…",
+    "options": [
+      "Kurikulum saja",
+      "Penelitian saja",
+      "Semua aspek akademik",
+      "Pengabdian masyarakat saja"
+    ],
+    "answer": "Semua aspek akademik"
+  },
+  {
+    "question": "Keterpaduan Islam dan sains menekankan bahwa seluruh ilmu…",
+    "options": ["Berdiri sendiri", "Berasal dari Tuhan", "Hanya untuk dunia", "Tidak perlu dihubungkan"],
+    "answer": "Berasal dari Tuhan"
+  },
+  {
+    "question": "Dalam Islam, fenomena alam dipandang sebagai…",
+    "options": ["Realita biasa", "Seni abstrak", "Ayat kauniyah", "Objek terpisah dari agama"],
+    "answer": "Ayat kauniyah"
+  },
+  {
+    "question": "Keterpaduan Islam dan sains memandang bahwa ilmu…",
+    "options": ["Netral tanpa nilai", "Wajib diarahkan pada kemaslahatan", "Tidak memiliki etika", "Hanya bersifat material"],
+    "answer": "Wajib diarahkan pada kemaslahatan"
+  },
+  {
+    "question": "Secara epistemologi, Islam mengakui dua sumber ilmu yaitu…",
+    "options": ["Tradisi dan adat", "Wahyu dan akal", "Emosi dan pengalaman", "Budaya dan eksperimen"],
+    "answer": "Wahyu dan akal"
+  },
+  {
+    "question": "Sains dalam Islam menjadi sarana untuk…",
+    "options": ["Menandingkan agama", "Menyangkal wahyu", "Mengenal kebesaran Allah", "Menghilangkan moral"],
+    "answer": "Mengenal kebesaran Allah"
+  },
+  {
+    "question": "Tujuan utama paradigma kesatuan ilmu adalah…",
+    "options": [
+      "Menciptakan ilmuwan sekuler",
+      "Mencetak generasi berilmu dan berakhlak",
+      "Menghapus ilmu agama",
+      "Menolak teknologi"
+    ],
+    "answer": "Mencetak generasi berilmu dan berakhlak"
+  },
+  {
+    "question": "Mana berikut yang paling menunjukkan implementasi Unity of Science?",
+    "options": [
+      "Menambahkan mata kuliah agama tanpa perubahan metode",
+      "Mewajibkan hafalan ayat bagi mahasiswa saintek",
+      "Dosen menghubungkan konsep ilmiah dengan nilai-nilai tauhid secara metodologis",
+      "Menempelkan ayat pada slide presentasi"
+    ],
+    "answer": "Dosen menghubungkan konsep ilmiah dengan nilai-nilai tauhid secara metodologis"
+  },
+  {
+    "question": "Ketika integrasi ilmu hanya dilakukan pada dokumen kurikulum tetapi tidak pada praktik kelas, maka dampaknya adalah…",
+    "options": [
+      "Mahasiswa bingung memilih tempat duduk",
+      "Integrasi berjalan maksimal",
+      "Tidak ada perubahan pola pikir akademik",
+      "Ilmu agama mendominasi"
+    ],
+    "answer": "Tidak ada perubahan pola pikir akademik"
+  },
+  {
+    "question": "Jika teknologi dianggap netral, maka nilai Islam menjadi penting karena…",
+    "options": [
+      "Teknologi tidak memerlukan aturan",
+      "Teknologi dapat digunakan untuk kebaikan atau keburukan",
+      "Teknologi adalah bagian dari wahyu",
+      "Semua teknologi aman"
+    ],
+    "answer": "Teknologi dapat digunakan untuk kebaikan atau keburukan"
+  },
+  {
+    "question": "Integrasi agama dan sains tidak akan berhasil jika…",
+    "options": [
+      "Mahasiswa aktif bertanya",
+      "Dosen memahami dua disiplin secara kritis",
+      "Agama digunakan untuk menjustifikasi semua teori sains tanpa analisis",
+      "Ada kajian multidisiplin"
+    ],
+    "answer": "Agama digunakan untuk menjustifikasi semua teori sains tanpa analisis"
+  },
+  {
+    "question": "Dalam integrasi sains, wahyu berfungsi sebagai…",
+    "options": [
+      "Pembatas kebebasan berpikir",
+      "Rambu etika dan perspektif filosofis",
+      "Pengganti metode ilmiah",
+      "Penghapus eksperimen"
+    ],
+    "answer": "Rambu etika dan perspektif filosofis"
+  },
+  {
+    "question": "Jika pendidikan Islam mengabaikan perkembangan teknologi, akibatnya adalah…",
+    "options": [
+      "Mahasiswa lebih kreatif",
+      "Indonesia menjadi pusat riset",
+      "Tertinggal dalam kompetisi global",
+      "Riset agama meningkat"
+    ],
+    "answer": "Tertinggal dalam kompetisi global"
+  },
+  {
+    "question": "Pada era digital, integrasi ilmu paling dibutuhkan untuk…",
+    "options": [
+      "Mempercepat scroll media sosial",
+      "Menyeimbangkan etika dan teknologi",
+      "Menghapus kurikulum sains",
+      "Menghalangi inovasi"
+    ],
+    "answer": "Menyeimbangkan etika dan teknologi"
+  },
+  {
+    "question": "Mana situasi yang paling membutuhkan integrasi agama dan sains?",
+    "options": ["Membuat poster", "Mendesain algoritma AI yang menentukan keputusan moral", "Belajar menggambar", "Bermain game"],
+    "answer": "Mendesain algoritma AI yang menentukan keputusan moral"
+  },
+  {
+    "question": "Jika tafaqquh fi al-Din hanya dipahami sebagai fikih, maka risikonya adalah…",
+    "options": [
+      "Mahasiswa menjadi kreatif",
+      "Agama kehilangan relevansi sosial",
+      "Sains berkembang cepat",
+      "Nilai moral meningkat"
+    ],
+    "answer": "Agama kehilangan relevansi sosial"
+  },
+  {
+    "question": "Paradigma kesatuan ilmu sulit diterapkan jika…",
+    "options": [
+      "Dosen hanya menguasai satu sudut pandang epistemologi",
+      "Mahasiswa rajin belajar",
+      "Perpustakaan lengkap",
+      "Kampus kecil"
+    ],
+    "answer": "Dosen hanya menguasai satu sudut pandang epistemologi"
+  },
+
+  {
+    "question": "Mengapa paradigma kesatuan ilmu harus diuji secara empiris?",
+    "options": [
+      "Untuk memastikan ia tidak berhenti sebagai slogan",
+      "Untuk menghilangkan teori",
+      "Untuk mengganti semua kurikulum",
+      "Untuk menolak disiplin ilmiah"
+    ],
+    "answer": "Untuk memastikan ia tidak berhenti sebagai slogan"
+  },
+  {
+    "question": "PTKIN akan kesulitan bersaing global jika…",
+    "options": [
+      "Kurikulumnya terlalu integratif",
+      "Tidak mampu menggabungkan tradisi akademik modern dan nilai Islam",
+      "Mahasiswa terlalu pintar",
+      "Dosen terlalu kreatif"
+    ],
+    "answer": "Tidak mampu menggabungkan tradisi akademik modern dan nilai Islam"
+  },
+  {
+    "question": "Integrasi-interkoneksi relevan karena…",
+    "options": [
+      "Semua ilmu bersifat absolut",
+      "Banyak masalah modern membutuhkan multidisiplin",
+      "Teknologi sudah sempurna",
+      "Sains tidak berubah"
+    ],
+    "answer": "Banyak masalah modern membutuhkan multidisiplin"
+  },
+
+  {
+    "question": "Ilmu yang teknis seperti fisika kuantum dapat diintegrasikan dengan agama melalui…",
+    "options": [
+      "Memaksa ayat mendukung teori",
+      "Pendekatan filosofis dan etis",
+      "Menghapus metode ilmiah",
+      "Mengganti eksperimen dengan tafsir"
+    ],
+    "answer": "Pendekatan filosofis dan etis"
+  },
+  {
+    "question": "Jika interkoneksi diabaikan, akibatnya adalah…",
+    "options": [
+      "Pengetahuan menjadi terpecah-pecah",
+      "Integrasi berjalan",
+      "Mahasiswa menjadi multidisiplin",
+      "Pandangan agama menguat"
+    ],
+    "answer": "Pengetahuan menjadi terpecah-pecah"
+  },
+  {
+    "question": "Dalam konteks AI yang mampu membuat keputusan moral, integrasi ilmu penting karena…",
+    "options": [
+      "AI tidak punya emosi",
+      "AI bisa menggantikan fatwa",
+      "Nilai agama penting untuk membatasi bias algoritma",
+      "Teknologi selalu bertentangan dengan agama"
+    ],
+    "answer": "Nilai agama penting untuk membatasi bias algoritma"
+  },
+  {
+    "question": "Jika integrasi ilmu bertujuan menghubungkan wahyu dan akal, tantangan terbesarnya adalah…",
+    "options": [
+      "Menentukan disiplin mana paling tinggi",
+      "Menyatukan metode normatif dan empiris tanpa saling meniadakan",
+      "Menambah jumlah kutipan ayat",
+      "Mengurangi penelitian laboratorium"
+    ],
+    "answer": "Menyatukan metode normatif dan empiris tanpa saling meniadakan"
+  },
+  {
+    "question": "Jika universitas hanya menambah istilah agama tanpa mengubah pendekatan sains, ini disebut…",
+    "options": [
+      "Integrasi etik",
+      "Integrasi simbolik",
+      "Integrasi metodologis",
+      "Integrasi ontologis"
+    ],
+    "answer": "Integrasi simbolik"
+  },
+  {
+    "question": "Sains empiris sebagai ayat kauniyah mengandung implikasi bahwa…",
+    "options": [
+      "Ayat kauniyah harus diuji lab",
+      "Sains tidak boleh berubah",
+      "Alam dipahami sebagai pesan Tuhan",
+      "Semua teori sains harus cocok tafsir klasik"
+    ],
+    "answer": "Alam dipahami sebagai pesan Tuhan"
+  },
+  {
+    "question": "Jika sains menemukan teori baru, respons integratif terbaik adalah…",
+    "options": [
+      "Menolak teorinya",
+      "Memaksa teks sesuai teori",
+      "Meneliti teori sambil membuka ruang tafsir kontekstual",
+      "Menganggap teori tidak penting"
+    ],
+    "answer": "Meneliti teori sambil membuka ruang tafsir kontekstual"
+  },
+  {
+    "question": "Indikator lulusan holistik adalah…",
+    "options": [
+      "Hafal teori",
+      "Lulus tepat waktu",
+      "Mampu menghubungkan masalah sosial dengan agama dan sains",
+      "Rajin seminar"
+    ],
+    "answer": "Mampu menghubungkan masalah sosial dengan agama dan sains"
+  },
+  {
+    "question": "Dikotomi ilmu tetap muncul karena…",
+    "options": [
+      "Teknologi terlalu cepat",
+      "Epistemologi sains dan agama berbeda",
+      "Mahasiswa malas membaca",
+      "Pengaruh negara asing"
+    ],
+    "answer": "Epistemologi sains dan agama berbeda"
+  },
+  {
+    "question": "Jika integrasi menolak metode empiris, risikonya adalah…",
+    "options": ["Sains menjadi dogmatis", "Agama menjadi modern", "Teknologi pesat", "Penelitian meningkat"],
+    "answer": "Sains menjadi dogmatis"
+  },
+  {
+    "question": "Jika sains dipakai untuk menafsirkan ayat secara berlebihan, risikonya…",
+    "options": [
+      "Ayat tidak relevan",
+      "Tafsir bergantung pada teori yang bisa berubah",
+      "Sains jadi dogma agama",
+      "Tafsir jadi sangat spiritual"
+    ],
+    "answer": "Tafsir bergantung pada teori yang bisa berubah"
+  },
+  {
+    "question": "Tantangan mengintegrasikan etika Islam ke sains modern adalah…",
+    "options": [
+      "Sedikit ayat bahas sains",
+      "Perbedaan nilai normatif dan metode empiris",
+      "Agama tidak bahas teknologi",
+      "Teknologi berasal dari luar"
+    ],
+    "answer": "Perbedaan nilai normatif dan metode empiris"
+  },
+  {
+    "question": "Integrasi tidak bisa hanya mengandalkan kesamaan ayat dan teori karena…",
+    "options": [
+      "Ayat absolut",
+      "Kesamaan teks tidak menjamin kesamaan metodologi epistemik",
+      "Teori sains tidak penting",
+      "Ayat tidak bisa ditafsirkan"
+    ],
+    "answer": "Kesamaan teks tidak menjamin kesamaan metodologi epistemik"
+  },
+  {
+    "question": "Peran filsafat dalam interkoneksi ilmu adalah…",
+    "options": [
+      "Filsafat punya ayat pendukung",
+      "Menjembatani cara berpikir normatif agama dan empiris sains",
+      "Filsafat sama dengan agama",
+      "Filsafat menolak sains"
+    ],
+    "answer": "Menjembatani cara berpikir normatif agama dan empiris sains"
+  },
+  {
+    "question": "Dalam konflik sains–agama, pendekatan paling ilmiah adalah…",
+    "options": [
+      "Salah satu harus menang",
+      "Menolak keduanya",
+      "Mengaji ulang premis epistemologis keduanya",
+      "Menghindari diskusi"
+    ],
+    "answer": "Mengaji ulang premis epistemologis keduanya"
+  },
+  {
+    "question": "Dalam integrasi Islam dan sains modern, posisi agama paling kuat adalah…",
+    "options": [
+      "Pengganti hukum alam",
+      "Alat pembenaran sains",
+      "Kerangka nilai yang memberi arah pemanfaatan ilmu",
+      "Bukti empiris teori"
+    ],
+    "answer": "Kerangka nilai yang memberi arah pemanfaatan ilmu"
+  },
+  {
+    "question": "QS. At-Taubah: 122 menunjukkan bahwa…",
+    "options": [
+      "Semua wajib syariah",
+      "PTKIN hanya untuk agama",
+      "Ada yang mendalami agama, ada yang mengajarkan",
+      "Tidak perlu riset interdisipliner"
+    ],
+    "answer": "Ada yang mendalami agama, ada yang mengajarkan"
+  },
+  {
+    "question": "Makna liyatafaqqahu dalam QS At-Taubah 122 adalah…",
+    "options": [
+      "Belajar sebatas rutinitas",
+      "Pemahaman dangkal",
+      "Pemahaman mendalam yang menuntut kesungguhan",
+      "Belajar tanpa guru"
+    ],
+    "answer": "Pemahaman mendalam yang menuntut kesungguhan"
+  },
+  {
+    "question": "Worldview tauhid bekerja sebagai…",
+    "options": [
+      "Pola dasar yang menyatukan orientasi nilai setiap ilmu tanpa menyeragamkan metode",
+      "Hierarki kebenaran di mana agama paling tinggi",
+      "Metode wahyu untuk semua disiplin",
+      "Konsep normatif tanpa implikasi epistemologis"
+    ],
+    "answer": "Pola dasar yang menyatukan orientasi nilai setiap ilmu tanpa menyeragamkan metode"
+  },
+  {
+    "question": "Kesatuan ilmu terwujud ketika wahyu, akal, dan sains…",
+    "options": [
+      "Wahyu absolut, akal dan sains hanya menguatkan",
+      "Akal dominan, wahyu simbolis",
+      "Ketiganya saling mengoreksi dan memperluas tanpa mendominasi",
+      "Berjalan paralel tanpa interaksi"
+    ],
+    "answer": "Ketiganya saling mengoreksi dan memperluas tanpa mendominasi"
   }
 ]
