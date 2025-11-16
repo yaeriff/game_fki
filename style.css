@@ -191,11 +191,18 @@ button:hover {
   color: #e74c3c;
   margin-bottom: 15px;
 }
+
 #quiz-question {
   font-size: 1.4rem;
   margin-bottom: 20px;
-  color: #333;
+  color: #222; /* teks gelap */
+  background-color: #f7f7f7; /* background terang */
+  padding: 12px 16px; /* biar nggak mepet */
+  border-radius: 8px; /* biar cantik */
+  font-weight: 600; /* biar lebih jelas */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* sedikit shadow */
 }
+
 
 #quiz-options button {
   display: block;
