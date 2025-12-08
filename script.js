@@ -7,12 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let canRoll = true;
   let lastRoll = 0;
 
-  // SIMPAN POSISI SEBELUM MAJU (dipakai untuk rollback jika salah)
-  let previousPosition = 0;
+  // CONTEXT KUIS (Menentukan nasib setelah menjawab)
+  let quizContext = {
+    type: "normal",
+    targetPosition: 0,
+  };
 
   // ===== TIMER KUIS =====
   let quizTimerInterval = null;
-  let quizTimeLeft = 30; // 30 detik sesuai request
+  let quizTimeLeft = 30;
 
   function formatTime(seconds) {
     const m = String(Math.floor(seconds / 60)).padStart(2, "0");
@@ -43,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ===== BOARD MAPPING (tetap seperti aslinya) =====
+  // ===== BOARD MAPPING (100 KOTAK) =====
   const boardCoordinates = {
     0: { x: 5, y: -5 }, // Start
     1: { x: 5, y: 5 },
@@ -180,23 +183,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const quizOptionsEl = document.getElementById("quiz-options");
   const quizFeedbackEl = document.getElementById("quiz-feedback");
   const closeFeedbackBtn = document.getElementById("close-feedback-btn");
-  const quizTimerEl = document.getElementById("quiz-timer");
 
   // ===== INITIALIZE =====
   startGameBtn.addEventListener("click", initGame);
 
   async function initGame() {
-    playerNames.player1 = document.getElementById("player1-name").value || "Pemain 1";
-    playerNames.player2 = document.getElementById("player2-name").value || "Pemain 2";
+    playerNames.player1 =
+      document.getElementById("player1-name").value || "Pemain 1";
+    playerNames.player2 =
+      document.getElementById("player2-name").value || "Pemain 2";
 
-    // pos awal
     updatePawnPosition("player1");
     updatePawnPosition("player2");
 
-    // tampilkan giliran
     turnNameEl.textContent = playerNames[currentPlayer];
 
-    // ambil soal
     try {
       const res = await fetch("get_questions.php");
       questions = await res.json();
@@ -205,7 +206,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } catch (err) {
       console.error("Gagal memuat soal:", err);
-      questions = [{ question: "Terjadi kesalahan memuat soal.", options: ["OK"], answer: "OK" }];
+      questions = [
+        {
+          question: "Terjadi kesalahan memuat soal.",
+          options: ["OK"],
+          answer: "OK",
+        },
+      ];
     }
 
     setupScreen.classList.remove("active");
@@ -231,13 +238,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== MOVE PLAYER =====
   function movePlayer(steps) {
-    // simpan posisi sebelum bergerak (dipakai untuk rollback)
-    previousPosition = playerPositions[currentPlayer];
-
     let currentPos = playerPositions[currentPlayer];
     let newPos = currentPos + steps;
 
-    // aturan khusus: 93 + 5 = mundur 5
+    // Aturan khusus: 93 + 5 = mundur 5
     if (currentPos === 93 && steps === 5) {
       newPos = currentPos - steps;
     } else if (newPos > 100) {
@@ -245,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
       newPos = 100 - overshoot;
     }
 
-    // cek menang (harus tepat 100)
+    // Cek Menang (Langsung)
     if (newPos === 100) {
       playerPositions[currentPlayer] = 100;
       updatePawnPosition(currentPlayer);
@@ -256,62 +260,166 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // update posisi sementara (sebelum cek ular/tangga)
+    // Pindahkan bidak ke posisi hasil dadu
     playerPositions[currentPlayer] = newPos;
     updatePawnPosition(currentPlayer);
 
-    // setelah pindah, cek special square
+    // Cek apakah mendarat di Ular/Tangga atau Kotak Biasa
     setTimeout(() => {
       checkSpecialSquaresAndMaybeQuiz();
     }, 800);
   }
 
-  // ===== HANDLE SNAKES & LADDERS + KUIS BEHAVIOR =====
+  // ===== CEK POSISI & TENTUKAN TIPE KUIS =====
   function checkSpecialSquaresAndMaybeQuiz() {
     const pos = playerPositions[currentPlayer];
 
+    // Cek jika di posisi Ular / Tangga
     if (snakesAndLadders[pos] !== undefined) {
       const destination = snakesAndLadders[pos];
 
-      // Jika naik (tangga): destination > pos
       if (destination > pos) {
-        // simpan posisi sebelum naik tangga tetap berupa previousPosition (sudah disimpan)
-        playerPositions[currentPlayer] = destination;
-        updatePawnPosition(currentPlayer);
-
-        // Jika tangga membawa tepat ke 100 -> menang tanpa kuis
-        if (destination === 100) {
-          setTimeout(() => {
-            alert(`Pemenangnya adalah ${playerNames[currentPlayer]}!`);
-            location.reload();
-          }, 800);
-          return;
-        }
-
-        // Tampilkan kuis setelah naik tangga
-        setTimeout(() => {
-          showQuiz();
-        }, 700);
+        // --- TANGGA ---
+        // Aturan: Jawab benar = naik. Salah = diam.
+        quizContext = { type: "ladder", targetPosition: destination };
+        showQuiz("Pertanyaan Tangga! Jawab benar untuk naik!");
       } else {
-        // Jika turun (ular): destination < pos
-        // Terapkan langsung, tetapi **tidak** menampilkan kuis (sesuai permintaan)
-        playerPositions[currentPlayer] = destination;
-        updatePawnPosition(currentPlayer);
-
-        // setelah turun karena ular, lanjutkan ke giliran berikutnya setelah delay
-        setTimeout(() => {
-          proceedAfterQuizOrNoQuiz();
-        }, 700);
+        // --- ULAR ---
+        // Aturan: Jawab benar = diam (bertahan). Salah = turun.
+        quizContext = { type: "snake", targetPosition: destination };
+        showQuiz("Awas Ular! Jawab benar agar tidak turun!");
       }
     } else {
-      // Kotak biasa -> tampilkan kuis
+      // --- KOTAK BIASA ---
+      // REQUEST BARU: Tidak ada kuis.
+      // Langsung lanjut ke pemain berikutnya (atau kocok lagi jika dapat 6)
       setTimeout(() => {
-        showQuiz();
+        proceedAfterQuizOrNoQuiz();
       }, 500);
     }
   }
 
-  // ===== UPDATE PAWN POSITION ON BOARD =====
+  // ===== TAMPILKAN KUIS =====
+  function showQuiz(customMessage = "") {
+    if (!Array.isArray(questions) || questions.length === 0) {
+      // Fallback jika soal kosong
+      questions = [{ question: "Contoh Soal", options: ["A"], answer: "A" }];
+    }
+
+    const randomQuestion =
+      questions[Math.floor(Math.random() * questions.length)];
+
+    // Tampilkan pesan konteks
+    if (customMessage) {
+      quizQuestionEl.innerHTML = `<small style="color:blue; font-weight:bold;">${customMessage}</small><br><br>${randomQuestion.question}`;
+    } else {
+      quizQuestionEl.textContent = randomQuestion.question;
+    }
+
+    quizOptionsEl.innerHTML = "";
+    quizFeedbackEl.innerHTML = "";
+    closeFeedbackBtn.style.display = "none";
+
+    randomQuestion.options.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.textContent = opt;
+      btn.addEventListener("click", () => {
+        stopQuizTimer();
+        handleAnswerSelection(opt, randomQuestion.answer);
+      });
+      quizOptionsEl.appendChild(btn);
+    });
+
+    quizModal.dataset.correctAnswer = randomQuestion.answer;
+    quizModal.classList.add("active");
+    startQuizTimer(30);
+  }
+
+  // ===== HANDLE JAWABAN (LOGIKA UTAMA DISINI) =====
+  function handleAnswerSelection(selectedOption, correctAnswer) {
+    quizOptionsEl
+      .querySelectorAll("button")
+      .forEach((b) => (b.disabled = true));
+
+    const isCorrect = selectedOption === correctAnswer;
+
+    if (isCorrect) {
+      // JAWABAN BENAR
+      if (quizContext.type === "ladder") {
+        // TANGGA: Naik ke target
+        playerPositions[currentPlayer] = quizContext.targetPosition;
+        updatePawnPosition(currentPlayer);
+        quizFeedbackEl.innerHTML = `<span style="color: green;">Benar! Kamu naik tangga!</span>`;
+      } else if (quizContext.type === "snake") {
+        // ULAR: Bertahan (Diam di mulut ular)
+        quizFeedbackEl.innerHTML = `<span style="color: green;">Benar! Kamu berhasil menahan ular!</span>`;
+      }
+    } else {
+      // JAWABAN SALAH / WAKTU HABIS
+      const correctMsg = `<br><small>Jawaban: ${correctAnswer}</small>`;
+
+      if (quizContext.type === "ladder") {
+        // TANGGA: Gagal naik (Diam di bawah tangga)
+        quizFeedbackEl.innerHTML =
+          `<span style="color: red;">Salah! Kamu tetap di bawah tangga.</span>` +
+          correctMsg;
+      } else if (quizContext.type === "snake") {
+        // ULAR: Turun ke ekor
+        playerPositions[currentPlayer] = quizContext.targetPosition;
+        updatePawnPosition(currentPlayer);
+        quizFeedbackEl.innerHTML =
+          `<span style="color: red;">Salah! Kamu turun digigit ular.</span>` +
+          correctMsg;
+      }
+    }
+
+    closeFeedbackBtn.style.display = "block";
+  }
+
+  // Jika waktu habis
+  function handleQuizTimeout() {
+    const correctAnswer = quizModal.dataset.correctAnswer;
+    handleAnswerSelection(null, correctAnswer); // Kirim null biar dianggap salah
+    quizFeedbackEl.innerHTML =
+      `<span style="color: red;">Waktu Habis!</span>` +
+      quizFeedbackEl.innerHTML;
+  }
+
+  // Tombol Lanjut
+  closeFeedbackBtn.addEventListener("click", () => {
+    stopQuizTimer();
+    quizModal.classList.remove("active");
+    proceedAfterQuizOrNoQuiz();
+  });
+
+  // Ganti Giliran / Kocok Lagi
+  function proceedAfterQuizOrNoQuiz() {
+    if (lastRoll === 6) {
+      canRoll = true;
+      turnNameEl.textContent = `${playerNames[currentPlayer]} (Kocok Lagi!)`;
+    } else {
+      switchTurn();
+    }
+  }
+
+  // Manajemen Giliran
+  function switchTurn() {
+    currentPlayer = currentPlayer === "player1" ? "player2" : "player1";
+    turnNameEl.textContent = playerNames[currentPlayer];
+    canRoll = true;
+  }
+
+  // Prevent klik dadu saat modal aktif
+  document.addEventListener("click", (e) => {
+    if (quizModal.classList.contains("active")) {
+      if (e.target && e.target.id === "dice") {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    }
+  });
+
+  // Posisi Bidak di UI
   function updatePawnPosition(player) {
     const pos = playerPositions[player];
     const coords = boardCoordinates[pos];
@@ -323,118 +431,4 @@ document.addEventListener("DOMContentLoaded", () => {
       pawn.style.transform = `translate(-50%, 50%)`;
     }
   }
-
-  // ===== TURN MANAGEMENT =====
-  function switchTurn() {
-    currentPlayer = currentPlayer === "player1" ? "player2" : "player1";
-    turnNameEl.textContent = playerNames[currentPlayer];
-    canRoll = true;
-  }
-
-  function proceedAfterQuizOrNoQuiz() {
-    // Dipanggil setelah kuis ditutup atau setelah tidak ada kuis (ular)
-    if (lastRoll === 6) {
-      // masih giliran sama, boleh kocok lagi
-      canRoll = true;
-      turnNameEl.textContent = `${playerNames[currentPlayer]} (Kocok Lagi!)`;
-    } else {
-      switchTurn();
-    }
-  }
-
-  // ===== KUIS =====
-  // showQuiz akan memulai timer; checkAnswer akan menghentikan timer
-  function showQuiz() {
-    if (!Array.isArray(questions) || questions.length === 0) {
-      // fallback singkat
-      quizQuestionEl.textContent = "Tidak ada soal.";
-      quizOptionsEl.innerHTML = `<button onclick="document.getElementById('close-feedback-btn').click()">OK</button>`;
-      quizModal.classList.add("active");
-      return;
-    }
-
-    // pilih soal acak
-    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-
-    // tampilkan
-    quizQuestionEl.textContent = randomQuestion.question;
-    quizOptionsEl.innerHTML = "";
-    quizFeedbackEl.innerHTML = "";
-    closeFeedbackBtn.style.display = "none";
-
-    // buat tombol opsi
-    randomQuestion.options.forEach((opt) => {
-      const btn = document.createElement("button");
-      btn.textContent = opt;
-      btn.addEventListener("click", () => {
-        // berhenti timer segera ketika memilih
-        stopQuizTimer();
-        handleAnswerSelection(opt, randomQuestion.answer);
-      });
-      quizOptionsEl.appendChild(btn);
-    });
-
-    // simpan jawaban benar di dataset untuk referensi timeout jika perlu
-    quizModal.dataset.correctAnswer = randomQuestion.answer;
-
-    // tampilkan modal dan mulai timer
-    quizModal.classList.add("active");
-    startQuizTimer(30);
-  }
-
-  // menangani pemilihan jawaban (benar/salah)
-  function handleAnswerSelection(selectedOption, correctAnswer) {
-    // disable semua opsi
-    quizOptionsEl.querySelectorAll("button").forEach((b) => (b.disabled = true));
-
-    if (selectedOption === correctAnswer) {
-      quizFeedbackEl.innerHTML = `<span style="color: green;">Jawaban Benar!</span>`;
-      // tetap di posisi sekarang (tidak rollback)
-    } else {
-      quizFeedbackEl.innerHTML = `<span style="color: red;">Jawaban Salah!</span><br>Yang benar adalah: ${correctAnswer}`;
-      // rollback ke previousPosition sesuai permintaan (A)
-      playerPositions[currentPlayer] = previousPosition;
-      updatePawnPosition(currentPlayer);
-    }
-
-    // tampilkan tombol lanjut
-    closeFeedbackBtn.style.display = "block";
-  }
-
-  // jika timer habis -> dianggap salah dan rollback
-  function handleQuizTimeout() {
-    // disable semua opsi
-    quizOptionsEl.querySelectorAll("button").forEach((b) => (b.disabled = true));
-
-    quizFeedbackEl.innerHTML = `<span style="color: red;">Waktu Habis!</span><br>Jawaban dianggap salah.`;
-    // rollback
-    playerPositions[currentPlayer] = previousPosition;
-    updatePawnPosition(currentPlayer);
-
-    closeFeedbackBtn.style.display = "block";
-  }
-
-  // tombol lanjut setelah feedback
-  closeFeedbackBtn.addEventListener("click", () => {
-    // pastikan timer mati
-    stopQuizTimer();
-
-    // sembunyikan modal
-    quizModal.classList.remove("active");
-
-    // Lanjutkan alur giliran sesuai aturan (6 dapat lagi)
-    proceedAfterQuizOrNoQuiz();
-  });
-
-  // ===== Prevent clicking dice while modal active (extra guard) =====
-  // (canRoll sudah mengontrol, ini hanya safety)
-  document.addEventListener("click", (e) => {
-    if (quizModal.classList.contains("active")) {
-      // jika modal aktif, jangan biarkan klik dadu berefek
-      if (e.target && e.target.id === "dice") {
-        e.stopPropagation();
-        e.preventDefault();
-      }
-    }
-  });
 });
