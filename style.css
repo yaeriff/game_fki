@@ -53,6 +53,7 @@ body {
 .player-input {
   margin-bottom: 20px;
   text-align: left;
+  width: 90%;
 }
 .player-input label {
   display: block;
